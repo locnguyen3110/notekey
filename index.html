@@ -7,10 +7,25 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <style>
-    .container {
-    max-width: 600px;
-    margin: 0 auto;
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
     padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 table {
@@ -20,21 +35,42 @@ table {
 
 th, td {
     border: 1px solid #ccc;
-    padding: 8px;
+    padding: 10px;
     text-align: left;
 }
 
-button.copy-btn {
-    padding: 5px 10px;
+th {
+    background-color: #f2f2f2;
+}
+
+button.copy-btn, button.reset-btn, button.contact-btn {
+    padding: 8px 15px;
     background-color: #007bff;
     color: #fff;
     border: none;
+    border-radius: 5px;
     cursor: pointer;
+}
+
+button.copy-btn:hover, button.reset-btn:hover, button.contact-btn:hover {
+    background-color: #0056b3;
+}
+
+button.copy-btn.copied {
+    background-color: #28a745;
+}
+
+button.contact-btn {
+    display: block;
+    margin: 20px auto;
 }
 
 </style>
 <body>
-    <H1 align="center">Key Ngày 11/5/2024</H1>
+    <H1 align="center">Key Ngày 12/5/2024</H1>
+    <h2 align="center">Key sẽ được update hàng ngày trừ những hôm mình lười 🥲🥲</h2>
+    <h2 align="center">Nếu ae ko sợ ban thì có thể mua key với giá 40k/tháng </h2>
+    <button class="contact-btn"><a href="https://zalo.me/84904174855">Liên Hệ</a></button>
     <div class="container">
         <table id="itemList">
             <thead>
@@ -48,59 +84,108 @@ button.copy-btn {
                 <!-- Table rows will be dynamically added here -->
             </tbody>
         </table>
+        <button id="resetButton" class="reset-btn">Reset Trạng Thái Active</button>
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-    const itemList = document.getElementById('itemList').getElementsByTagName('tbody')[0];
+            const itemList = document.getElementById('itemList').getElementsByTagName('tbody')[0];
 
-    // Sample data (you can replace this with your own data)
-    const data = [
-        { id: 1, key: '1days-00e2-4370-9460-901ba455c1bb' },
-        { id: 2, key: '1days-15a9-432f-8e3f-e173a6e90169' },
-        { id: 3, key: '1days-97fc-4b19-b71d-dce912e43a1e' },
-        { id: 4, key: '1days-1991-41f2-b3d0-fabe9007ff48' },
-        { id: 5, key: '1days-4555-464c-83f9-70725510be63' },
-        { id: 6, key: '1days-83d0-487b-b222-580315a6e681' },
-        { id: 7, key: '1days-3619-4baa-8a4c-472f5d835bf8' },
-        { id: 8, key: '1days-0355-49d7-9477-40a4945b0be4' },
-        { id: 9, key: '1days-0831-457e-b7c0-9c2c604f141e' },
-        { id: 10, key: '1days-59b4-465b-8f26-2237b9a05a77' },
-        { id: 11, key: '1days-76cb-4b3e-8adb-753cb934de6e' },
-        { id: 12, key: '1days-7002-4720-8b9f-ab618fa9f2bf' },
-        { id: 13, key: '1days-f827-4984-9332-be40a23f9432' },
-        { id: 14, key: '1days-69f9-4cf7-9c52-59f7eff5a898' },
-        { id: 15, key: '1days-0396-4a2e-afd6-671fa82667e8' },
-        { id: 16, key: '1days-4bff-4c00-98be-50560e57edc6' },
-        { id: 17, key: '1days-b5e0-437e-907b-b91bb94b4929' },
-        { id: 18, key: '1days-2629-47ed-ac82-977c557d638d' },
-        { id: 19, key: '1days-3802-4f74-87e4-437d8796ce61' },
-        { id: 20, key: '1days-af9f-4485-809b-8a66a2a2f636' }
-    ];
+            // Sample data (you can replace this with your own data)
+            const data = [
+                { id: 1, key: '21a22f6b-1449-442c-93dc-ac701c6421c2	', copied: false },
+                { id: 2, key: 'a2df43cc-b6f4-446c-b980-13c62e56bc2d	', copied: false },
+                { id: 3, key: 'd3a9c86c-0fa0-41aa-87d0-d9a80ff60a84	', copied: false },
+                { id: 4, key: 'f5e1b6e7-948f-42ff-8e8c-117bd742b9a0	', copied: false },
+                { id: 5, key: '89e3bbc7-34f8-4623-9467-7f2feeef60fa	', copied: false },
+                { id: 6, key: 'f53faf4c-89b3-4d4b-bab3-3f163fc73f0b' , copied: false },
+                { id: 7, key: '7a244327-75a9-43fc-816e-41c8f0c9d879	', copied: false },
+                { id: 8, key: 'b8a34c38-231a-43ba-b790-f06988e6cbc3	', copied: false },
+                { id: 9, key: '63f0612a-4a20-44e2-9add-f1473efea292	', copied: false },
+                { id: 10, key: 'a788e431-3c5b-4915-83d9-0a6b38355375 ', copied: false },
+                { id: 11, key: '4f343d1b-ae88-4b48-8aa5-1513a5f0a8f9 ', copied: false },
+                { id: 12, key: 'ee74a75e-6209-4d74-9366-4b1ce43f8893 ', copied: false },
+                { id: 13, key: '0a3bc582-f6c0-4089-af90-b8092af07474 ', copied: false },
+                { id: 14, key: '71c6a81a-ba50-4f60-adf8-badd11da4339 ', copied: false },
+                { id: 15, key: '41fb056a-18bd-40ab-87d6-674d477b9c8f ', copied: false },
+                { id: 16, key: '73280887-6979-4573-9c5b-cab5da3bdb93 ', copied: false },
+                { id: 17, key: 'f12ef1fa-6a2d-4b9b-8904-e13ff33880d0 ', copied: false },
+                { id: 18, key: '9d916d16-69b1-4a11-acef-c9ab2e8bf4e0 ', copied: false },
+                { id: 19, key: 'a7daa8ef-2375-44c5-9857-6a661dca55ba ', copied: false },
+                { id: 20, key: '8181279e-009f-4aba-aa1a-4c8a5e8340e8 ', copied: false },
+   
+                // Add more data here...
+            ];
 
-    // Populate table with data
-    data.forEach(function(item) {
-        const row = itemList.insertRow();
-        const idCell = row.insertCell(0);
-        const keyCell = row.insertCell(1);
-        const actionCell = row.insertCell(2);
+           // Restore copied state from local storage
+           if (localStorage.getItem('copiedItems')) {
+                const copiedItems = JSON.parse(localStorage.getItem('copiedItems'));
+                data.forEach(item => {
+                    if (copiedItems.includes(item.key)) {
+                        item.copied = true;
+                    }
+                });
+            }
 
-        idCell.innerText = item.id;
-        keyCell.innerText = item.key;
+            // Populate table with data
+            function populateTable() {
+                itemList.innerHTML = ''; // Clear existing rows
+                data.forEach(function(item) {
+                    const row = itemList.insertRow();
+                    const idCell = row.insertCell(0);
+                    const keyCell = row.insertCell(1);
+                    const actionCell = row.insertCell(2);
 
-        const copyButton = document.createElement('button');
-        copyButton.innerText = 'Copy';
-        copyButton.classList.add('copy-btn');
+                    idCell.innerText = item.id;
+                    keyCell.innerText = item.key;
 
-        copyButton.addEventListener('click', function() {
-            const textToCopy = item.key;
-            navigator.clipboard.writeText(textToCopy);
-            alert('Key copied: ' + textToCopy);
+                    const copyButton = document.createElement('button');
+                    copyButton.innerText = item.copied ? 'Đã Copy' : 'Copy';
+                    copyButton.classList.add('copy-btn');
+                    if (item.copied) {
+                        copyButton.classList.add('copied');
+                        copyButton.disabled = true;
+                    }
+
+                    copyButton.addEventListener('click', function() {
+                        const textToCopy = item.key;
+                        navigator.clipboard.writeText(textToCopy);
+                        alert('Key copied: ' + textToCopy);
+
+                        // Đặt cờ "copied" thành true và cập nhật giao diện
+                        item.copied = true;
+                        copyButton.innerText = 'Đã Copy';
+                        copyButton.classList.add('copied');
+                        copyButton.disabled = true;
+
+                        // Lưu trạng thái đã copy vào local storage
+                        let copiedItems = [];
+                        if (localStorage.getItem('copiedItems')) {
+                            copiedItems = JSON.parse(localStorage.getItem('copiedItems'));
+                        }
+                        copiedItems.push(item.key);
+                        localStorage.setItem('copiedItems', JSON.stringify(copiedItems));
+                    });
+
+                    actionCell.appendChild(copyButton);
+                });
+            }
+
+            populateTable();
+
+            resetButton.addEventListener('click', function() {
+                const password = prompt('Nhập mật khẩu để reset trạng thái active:');
+                // Thêm điều kiện kiểm tra mật khẩu
+                if (password === 'Locyeutrang') {
+                    data.forEach(item => {
+                        item.copied = false;
+                    });
+                    localStorage.removeItem('copiedItems');
+                    populateTable();
+                } else {
+                    alert('Mật khẩu không chính xác. Vui lòng thử lại.');
+                }
+            });
         });
-
-        actionCell.appendChild(copyButton);
-    });
-});
-
     </script>
 </body>
 </html>
