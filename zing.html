@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List Items</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+button.copy-btn, button.reset-btn, button.contact-btn {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.copy-btn:hover, button.reset-btn:hover, button.contact-btn:hover {
+    background-color: #0056b3;
+}
+
+button.copy-btn.copied {
+    background-color: #28a745;
+}
+
+button.contact-btn {
+    display: block;
+    margin: 20px auto;
+    font-weight: bold;
+}
+
+</style>
+<body>
+    <H1 align="center">Key Ngày 7/6/2024</H1>
+    <h2 align="center">Key Sẽ được update theo tùy hứng 😆😆</h2>
+    <h2 align="center">Mình Làm khá là nhiều game nhưng mà hơi lười bán nên chưa trình diện ae thôi</h2>
+    <h2 align="center">Key zing cho ae trải nghiệm giá 20k/tháng </h2>
+    <button class="contact-btn"><a href="https://zalo.me/84904174855">Liên Hệ</a></button>
+    <button class="contact-btn"><a href="index.html">Key FF</a></button>
+    <div class="container">
+        <table id="itemList">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Key</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be dynamically added here -->
+            </tbody>
+        </table>
+        <!-- <button id="resetButton" class="reset-btn">Reset Trạng Thái Active</button> -->
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const itemList = document.getElementById('itemList').getElementsByTagName('tbody')[0];
+
+            // Sample data (you can replace this with your own data)
+            const data = [
+                // { id: 1, key: '	', copied: false },
+                // { id: 2, key: '	', copied: false },
+                // { id: 3, key: ' ', copied: false },
+                // { id: 4, key: '	', copied: false },
+                // { id: 5, key: '	', copied: false },
+                // { id: 6, key: '	', copied: false },
+                // { id: 7, key: '	', copied: false },
+                // { id: 8, key: '	', copied: false },
+                // { id: 9, key: '	', copied: false },
+                // { id: 10, key: ' ', copied: false },
+
+                { id: 1, key: '573b37bf-de2c-46bf-8f34-ffc8140f7fb6	', copied: false },
+                { id: 2, key: '5dcd0cb6-5fe7-467e-9791-be6e9287cd5e	', copied: false },
+                { id: 3, key: '9a719e34-c9d3-4de8-b6f9-64ef8afc01a2 ', copied: false },
+                { id: 4, key: '5ebcf2e2-34c5-4816-860e-96e2faec6798	', copied: false },
+                { id: 5, key: 'b36b8459-02e8-4c0b-bb1a-bea02cc54e54	', copied: false },
+                { id: 6, key: 'a62f997c-e577-4143-a61b-e7d03798ef64	', copied: false },
+                { id: 7, key: '010c59a7-704f-485a-b427-db3ac84cac6a	', copied: false },
+                { id: 8, key: 'ba5e9518-42e4-4323-b23c-917856b992cb	', copied: false },
+                { id: 9, key: '19628f71-e4d2-49b8-80e6-eb717d9fdb55	', copied: false },
+                { id: 10, key: '158b7d0c-4bea-468b-aeee-c013a430ae08 ', copied: false },
+               
+                // { id: 11, key: ' ', copied: false },
+                // { id: 12, key: ' ', copied: false },
+                // { id: 13, key: ' ', copied: false },
+                // { id: 14, key: ' ', copied: false },
+                // { id: 15, key: ' ', copied: false },
+                // { id: 16, key: ' ', copied: false },
+                // { id: 17, key: ' ', copied: false },
+                // { id: 18, key: ' ', copied: false },
+                // { id: 19, key: ' ', copied: false },
+                // { id: 20, key: ' ', copied: false },
+   
+                // Add more data here...
+            ];
+
+           // Restore copied state from local storage
+           if (localStorage.getItem('copiedItems')) {
+                const copiedItems = JSON.parse(localStorage.getItem('copiedItems'));
+                data.forEach(item => {
+                    if (copiedItems.includes(item.key)) {
+                        item.copied = true;
+                    }
+                });
+            }
+
+            // Populate table with data
+            function populateTable() {
+                itemList.innerHTML = ''; // Clear existing rows
+                data.forEach(function(item) {
+                    const row = itemList.insertRow();
+                    const idCell = row.insertCell(0);
+                    const keyCell = row.insertCell(1);
+                    const actionCell = row.insertCell(2);
+
+                    idCell.innerText = item.id;
+                    keyCell.innerText = item.key;
+
+                    const copyButton = document.createElement('button');
+                    copyButton.innerText = item.copied ? 'Đã Copy' : 'Copy';
+                    copyButton.classList.add('copy-btn');
+                    if (item.copied) {
+                        copyButton.classList.add('copied');
+                        copyButton.disabled = true;
+                    }
+
+                    copyButton.addEventListener('click', function() {
+                        const textToCopy = item.key;
+                        navigator.clipboard.writeText(textToCopy);
+                        alert('Key copied: ' + textToCopy);
+
+                        // Đặt cờ "copied" thành true và cập nhật giao diện
+                        item.copied = true;
+                        copyButton.innerText = 'Đã Copy';
+                        copyButton.classList.add('copied');
+                        copyButton.disabled = true;
+
+                        // Lưu trạng thái đã copy vào local storage
+                        let copiedItems = [];
+                        if (localStorage.getItem('copiedItems')) {
+                            copiedItems = JSON.parse(localStorage.getItem('copiedItems'));
+                        }
+                        copiedItems.push(item.key);
+                        localStorage.setItem('copiedItems', JSON.stringify(copiedItems));
+                    });
+
+                    actionCell.appendChild(copyButton);
+                });
+            }
+
+            populateTable();
+
+            resetButton.addEventListener('click', function() {
+                const password = prompt('Nhập mật khẩu để reset trạng thái active:');
+                // Thêm điều kiện kiểm tra mật khẩu
+                if (password === 'Locyeutrang') {
+                    data.forEach(item => {
+                        item.copied = false;
+                    });
+                    localStorage.removeItem('copiedItems');
+                    populateTable();
+                } else {
+                    alert('Mật khẩu không chính xác. Vui lòng thử lại.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
